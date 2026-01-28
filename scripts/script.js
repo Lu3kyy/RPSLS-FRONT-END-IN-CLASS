@@ -16,7 +16,7 @@ let aTies = 0;
 //EXAMPLE OPTIONS YOUR API COULD RETURN ROCK PAPER OR SCISSORS
 //create a var to hold our url
 const aCpuApiUrl =
-  "https://rpsdemov1-bad6e5b0eff8bxdc.westus3-01.azurewebsites.net/api/rps/rps";
+  "https://guptilllsg2526-fqapfdeffbdegwc5.westus3-01.azurewebsites.net/api/Game/random";
 
 //---------DOM references---------//
 // Gets the CPU mode button from the HTML
@@ -62,11 +62,15 @@ const aBtnReset = document.getElementById("btnReset");
 const aBtnP1Rock = document.getElementById("btnP1Rock");
 const aBtnP1Paper = document.getElementById("btnP1Paper");
 const aBtnP1Scissors = document.getElementById("btnP1Scissors");
+const aBtnP1Lizard = document.getElementById("btnP1Lizard");
+const aBtnP1Spock = document.getElementById("btnP1Spock");
 
 // Player 2 choice buttons (only used in PVP mode)
 const aBtnP2Rock = document.getElementById("btnP2Rock");
 const aBtnP2Paper = document.getElementById("btnP2Paper");
 const aBtnP2Scissors = document.getElementById("btnP2Scissors");
+const aBtnP2Lizard = document.getElementById("btnP2Lizard");
+const aBtnP2Spock = document.getElementById("btnP2Spock");
 
 //helper functions
 function aSetMode(aNewMode) {
@@ -128,12 +132,11 @@ function aUpdateScoresUI() {
 }
 
 function aRandomCpuChoice() {
-  //generate a random number between 0 and 2
-  const aNum = Math.floor(Math.random() * 3);
+  //generate a random number between 0 and 4
+  const aNum = Math.floor(Math.random() * 5);
   //map number to choice
-  if (aNum === 0) return "rock";
-  if (aNum === 1) return "paper";
-  return "scissors";
+  const aChoices = ["rock", "paper", "scissors", "lizard", "spock"];
+  return aChoices[aNum];
 }
 
 //--------get the cpus choice from our api endpoint --------//
@@ -159,11 +162,20 @@ function aGetCpuChoiceFromAPI() {
 function aGetWinner(aP1, aP2) {
   if (aP1 === aP2) return "tie";
 
-  if (aP1 === "rock" && aP2 === "scissors") return "p1";
-
-  if (aP1 === "paper" && aP2 === "rock") return "p1";
-
-  if (aP1 === "scissors" && aP2 === "paper") return "p1";
+  // Rock beats Scissors and Lizard
+  if (aP1 === "rock" && (aP2 === "scissors" || aP2 === "lizard")) return "p1";
+  
+  // Paper beats Rock and Spock
+  if (aP1 === "paper" && (aP2 === "rock" || aP2 === "spock")) return "p1";
+  
+  // Scissors beats Paper and Lizard
+  if (aP1 === "scissors" && (aP2 === "paper" || aP2 === "lizard")) return "p1";
+  
+  // Lizard beats Paper and Spock
+  if (aP1 === "lizard" && (aP2 === "paper" || aP2 === "spock")) return "p1";
+  
+  // Spock beats Scissors and Rock
+  if (aP1 === "spock" && (aP2 === "scissors" || aP2 === "rock")) return "p1";
 
   return "p2";
 }
@@ -279,6 +291,12 @@ aBtnP1Paper.addEventListener("click", () => {
 aBtnP1Scissors.addEventListener("click", () => {
   aHandleP1Pick("scissors");
 });
+aBtnP1Lizard.addEventListener("click", () => {
+  aHandleP1Pick("lizard");
+});
+aBtnP1Spock.addEventListener("click", () => {
+  aHandleP1Pick("spock");
+});
 
 // Player 2 choice buttons
 aBtnP2Rock.addEventListener("click", () => {
@@ -289,6 +307,12 @@ aBtnP2Paper.addEventListener("click", () => {
 });
 aBtnP2Scissors.addEventListener("click", () => {
   aHandleP2Pick("scissors");
+});
+aBtnP2Lizard.addEventListener("click", () => {
+  aHandleP2Pick("lizard");
+});
+aBtnP2Spock.addEventListener("click", () => {
+  aHandleP2Pick("spock");
 });
 
 // Play Again button
