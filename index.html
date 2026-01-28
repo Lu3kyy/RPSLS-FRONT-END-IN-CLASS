@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RPS - Level 1</title>
+
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+
+  <body>
+    <!-- 
+    Main container for the entire application.
+    Semantically represents the primary content of the page.
+  -->
+    <main class="app">
+      <!-- Main title of the game -->
+      <h1>Rock • Paper • Scissors</h1>
+
+      <!-- ================= MODE SECTION ================= -->
+      <!-- 
+      Allows the user to choose between CPU mode and PVP mode.
+    -->
+      <section class="card">
+        <!-- Section heading -->
+        <h2>Mode</h2>
+
+        <!-- 
+        Row container used for layout (buttons side-by-side).
+      -->
+        <div class="row">
+          <!-- 
+          Button to switch to CPU mode.
+          - id is used by JavaScript
+          - "active" class shows it is selected by default
+        -->
+          <button id="btnModeCpu" class="btn active" type="button">
+            1 vs CPU
+          </button>
+
+          <!-- 
+          Button to switch to Player vs Player mode.
+        -->
+          <button id="btnModePvp" class="btn" type="button">1 vs 1</button>
+        </div>
+
+        <!-- 
+        Instruction text that changes depending on mode.
+        JavaScript updates this text dynamically.
+      -->
+        <p class="hint" id="modeHint">
+          Pick your move. The CPU will pick automatically.
+        </p>
+      </section>
+
+      <!-- ================= PLAYER 1 SECTION ================= -->
+      <!-- 
+      Contains Player 1 controls and round results.
+    -->
+      <section class="card">
+        <h2>Player 1</h2>
+
+        <!-- Player 1 choice buttons -->
+        <div class="row">
+          <button id="btnP1Rock" class="btn" type="button">Rock</button>
+          <button id="btnP1Paper" class="btn" type="button">Paper</button>
+          <button id="btnP1Scissors" class="btn" type="button">Scissors</button>
+        </div>
+
+        <!-- 
+        Displays the current picks for Player 1 and Player 2/CPU.
+        These spans are updated by JavaScript.
+      -->
+        <div class="status">
+          <div>
+            <strong>P1 Pick:</strong>
+            <span id="p1Pick">-</span>
+          </div>
+
+          <div>
+            <strong>P2/CPU Pick:</strong>
+            <span id="p2Pick">-</span>
+          </div>
+        </div>
+
+        <!-- 
+        Displays the result of the current round.
+        Example: "Player 1 wins the round!"
+      -->
+        <p class="result" id="roundResult">Make a pick to start!</p>
+      </section>
+
+      <!-- ================= PLAYER 2 SECTION ================= -->
+      <!-- 
+      This section is ONLY used in Player vs Player mode.
+      JavaScript hides or shows this section depending on mode.
+    -->
+      <section class="card" id="p2Section">
+        <h2>Player 2 (only for 1 vs 1)</h2>
+
+        <!-- Player 2 choice buttons -->
+        <div class="row">
+          <button id="btnP2Rock" class="btn" type="button">Rock</button>
+          <button id="btnP2Paper" class="btn" type="button">Paper</button>
+          <button id="btnP2Scissors" class="btn" type="button">Scissors</button>
+        </div>
+
+        <!-- 
+        Instruction text for Player 2.
+        Changes depending on game state.
+      -->
+        <p class="hint" id="p2Hint">Waiting for Player 1...</p>
+      </section>
+
+      <!-- ================= SCORE SECTION ================= -->
+      <!-- 
+      Displays cumulative scores across rounds.
+    -->
+      <section class="card">
+        <h2>Score</h2>
+
+        <!-- Score values updated by JavaScript -->
+        <div class="score">
+          <div>
+            <strong>Player 1:</strong>
+            <span id="p1Score">0</span>
+          </div>
+
+          <div>
+            <strong>Player 2/CPU:</strong>
+            <span id="p2Score">0</span>
+          </div>
+
+          <div>
+            <strong>Ties:</strong>
+            <span id="ties">0</span>
+          </div>
+        </div>
+
+        <!-- Control buttons -->
+        <div class="row">
+          <!-- 
+          Clears the current round picks
+          but does NOT reset scores.
+        -->
+          <button id="btnPlayAgain" class="btn" type="button">
+            Play Again (clear picks)
+          </button>
+
+          <!-- 
+          Fully resets the game:
+          - Scores go back to 0
+          - Picks are cleared
+        -->
+          <button id="btnReset" class="btn danger" type="button">
+            Reset Game (score = 0)
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- 
+    Loads the JavaScript file AFTER the HTML.
+    This ensures all DOM elements exist before JS runs.
+  -->
+    <script src="./client/scripts/script.js"></script>
+  </body>
+</html>
